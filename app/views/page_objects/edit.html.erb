@@ -1,0 +1,31 @@
+<% stylesheets 'google-analytics-edit' %>
+<% javascripts 'prototype', 'google-analytics-edit' -%>
+
+<% fields_for_page_object do |f| %>
+<div class='notice'>- Tracking Page with Google Analytics -</div>
+<div class="all-editable">
+  <div class="site-wide">
+    <div class="readonly">
+      Site Wide Analytics Key: 
+      <%=h @page_object.site_wide_analytics_key.blank? ? '[None]' : @page_object.site_wide_analytics_key %> 
+      <a class='button edit-site-wide-analytics-key'><%=h @page_object.site_wide_analytics_key.blank? ?  'set' : 'edit' %></a>
+    </div>
+    <div class="editable hidden">
+      <%= f.label :site_wide_analytics_key %>
+      <%= f.text_field :site_wide_analytics_key %> (e.g. UA-3498345-3)
+    </div>
+  </div>
+  
+  <div class="analytics-keys">
+    <% @page_object.analytics_keys.each do |ak| -%>
+      <%= render :partial => "analytics_keys/edit", :locals => { :f => f, :analytics_key => ak }%>
+    <% end -%>
+  </div>
+  
+  <div><a class='button add-analytics-key'>Add Another Key for this Page</a></div>
+  
+  <div class="new-analytics-key-code" style="display:none">
+    <%= render(:partial => 'analytics_keys/edit', :locals => {:f => f }) %>
+  </div>
+</div>
+<% end %>

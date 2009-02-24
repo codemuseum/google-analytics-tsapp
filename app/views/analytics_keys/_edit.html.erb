@@ -1,0 +1,23 @@
+<%# Takes f and optionally analytics_key %>
+<% analytics_key = nil if local_assigns[:analytics_key].nil? %>
+
+<% fields_for "#{f.object_name}[assigned_analytics_keys][]", (analytics_key || AnalyticsKey.new) do |akf| -%>
+<div class="analytics-key">
+  
+  <div class="remove"><a title="Remove this analytics key.">Delete Analytics Key</a></div>
+    
+  <% if f.object.all_analytics_keys.any? -%>
+    <%= akf.label :id, "Analytics Key" %>
+    <%= akf.select :id, (f.object.all_analytics_keys + [["New...", nil]]), { :selected => (analytics_key ? analytics_key.to_form_select_value : '') }, { :index => nil } %> 
+    <a class='button edit-analytics-key'>edit</a>
+  <% end -%>
+  
+  <div class="editable<%= ' hidden' if f.object.all_analytics_keys.any? %>">
+    <%= akf.label :key %>
+    <%= akf.text_field :key, :index => nil %>
+    &nbsp; &bull; &nbsp;
+    <%= akf.label :nickname %>
+    <%= akf.text_field :nickname, :index => nil %>
+  </div>
+</div>
+<% end %>

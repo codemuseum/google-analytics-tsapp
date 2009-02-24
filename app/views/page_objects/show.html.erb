@@ -1,0 +1,11 @@
+<% stylesheets 'google-analytics' -%>
+<% # javascripts 'prototype', 'effects', 'dragdrop', 'assets' -%>
+
+<% if @page_object.site_wide_key -%>
+<div class="google-analytics-id" style="display:none;"><%=h @page_object.site_wide_key.key %></div>
+<% end -%>
+<% @page_object.analytics_keys.each do |ak| -%>
+<div class="google-analytics-id" style="display:none;"><%=h ak.key %></div>
+<% end -%>
+
+
