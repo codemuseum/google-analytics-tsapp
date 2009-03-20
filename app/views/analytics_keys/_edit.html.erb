@@ -4,7 +4,7 @@
 <% fields_for "#{f.object_name}[assigned_analytics_keys][]", (analytics_key || AnalyticsKey.new) do |akf| -%>
 <div class="analytics-key">
   
-  <div class="remove"><a title="Remove this analytics key.">Delete Analytics Key</a></div>
+  <div class="remove"><a title="Remove this analytics key." class="remove-button">Delete Analytics Key</a></div>
     
   <% if f.object.all_analytics_keys.any? -%>
     <%= akf.label :id, "Analytics Key" %>
